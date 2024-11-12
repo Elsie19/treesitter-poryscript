@@ -1,0 +1,38 @@
+{
+  "grammars": [
+    {
+      "name": "poryscript",
+      "camelcase": "Poryscript",
+      "scope": "source.pory",
+      "path": ".",
+      "file-types": [
+        "pory"
+      ],
+      "injection-regex": "^poryscript$",
+      "highlights": "queries/pory/highlights.scm",
+      "locals": "queries/pory/locals.scm"
+    }
+  ],
+  "metadata": {
+    "version": "0.1.0",
+    "license": "MIT",
+    "description": "Treesitter grammar for Poryscript language",
+    "authors": [
+      {
+        "name": "Henry Wenger-Stickel",
+        "email": "hwengerstickel@pm.me"
+      }
+    ],
+    "links": {
+      "repository": "https://github.com/huderlem/poryscript"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": true,
+    "node": true,
+    "python": true,
+    "rust": true,
+    "swift": true
+  }
+}

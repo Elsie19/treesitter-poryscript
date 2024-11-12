@@ -1,0 +1,15 @@
+# foo
+const FOO = 5
+const BAR = FOO + 2 - 5
+
+script(local) MyScript {
+    # hello
+    lock
+    if (flag(FLAG_TEMP) == true) {
+        foo("foo {bar}\n")
+    }
+}
+
+mart foo {
+    FOO_BAR
+}
