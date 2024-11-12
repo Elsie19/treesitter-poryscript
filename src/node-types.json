@@ -37,6 +37,11 @@
     "fields": {}
   },
   {
+    "type": "builtin_func",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "const",
     "named": true,
     "fields": {
@@ -78,9 +83,19 @@
     "type": "function_call",
     "named": true,
     "fields": {
+      "builtin_func": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "builtin_func",
+            "named": true
+          }
+        ]
+      },
       "function_name": {
         "multiple": false,
-        "required": true,
+        "required": false,
         "types": [
           {
             "type": "identifier",
@@ -291,6 +306,10 @@
         {
           "type": "script",
           "named": true
+        },
+        {
+          "type": "text",
+          "named": true
         }
       ]
     }
@@ -309,6 +328,36 @@
         },
         {
           "type": "interpolation",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "text",
+    "named": true,
+    "fields": {
+      "text_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "scope",
+          "named": true
+        },
+        {
+          "type": "string",
           "named": true
         }
       ]
@@ -383,11 +432,19 @@
     "named": false
   },
   {
+    "type": "call",
+    "named": false
+  },
+  {
     "type": "comment",
     "named": true
   },
   {
     "type": "const",
+    "named": false
+  },
+  {
+    "type": "end",
     "named": false
   },
   {
@@ -400,6 +457,10 @@
   },
   {
     "type": "global",
+    "named": false
+  },
+  {
+    "type": "goto",
     "named": false
   },
   {
@@ -427,7 +488,15 @@
     "named": true
   },
   {
+    "type": "return",
+    "named": false
+  },
+  {
     "type": "script",
+    "named": false
+  },
+  {
+    "type": "text",
     "named": false
   },
   {

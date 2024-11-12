@@ -5,11 +5,17 @@ const BAR = FOO + 2 - 5
 script(local) MyScript {
     # hello
     lock
-    if (flag(FLAG_TEMP) == true) {
+    if (flag(FLAG_TEMP) == TRUE) {
         foo("foo {bar}\n")
     }
+    goto
 }
 
 mart foo {
     FOO_BAR
+    ITEM_NONE
+}
+
+text foo {
+    "bar\n"
 }

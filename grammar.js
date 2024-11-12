@@ -17,7 +17,8 @@ module.exports = grammar({
       $.comment,
       $.const,
       $.script,
-      $.mart
+      $.mart,
+      $.text
     ),
 
     comment: _ => token(prec(-10, choice(/#.*/, /\/\/.*/))),
@@ -31,9 +32,9 @@ module.exports = grammar({
     string: $ => seq(
       '"',
       repeat(choice(
-        /[^"\\\n]+/,
-        $.escape_sequence,
+        /[^"\\\n{}]+/,
         $.interpolation,
+        $.escape_sequence,
       )),
       '"'
     ),
@@ -65,8 +66,10 @@ module.exports = grammar({
       $._expression
     )),
 
+    builtin_func: $ => choice('end', 'return', 'call', 'goto'),
+
     function_call: $ => prec(2, seq(
-      field('function_name', $.identifier),
+      choice(field('builtin_func', $.builtin_func), field('function_name', $.identifier)),
       optional(seq(
         '(',
         field('function_params', optional(
@@ -133,6 +136,15 @@ module.exports = grammar({
       field('mart_name', $.identifier),
       '{',
       repeat($.identifier),
+      '}',
+    ),
+
+    text: $ => seq(
+      'text',
+      optional(seq('(', $.scope, ')')),
+      field('text_name', $.identifier),
+      '{',
+      repeat($.string),
       '}',
     ),
   }
