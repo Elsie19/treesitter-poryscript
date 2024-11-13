@@ -47,7 +47,7 @@
 
 (identifier) @variable
 ((identifier) @constant
- (#match? @constant "^[A-Z][A-Z\\d_]*$")) ; Make uppercase different "type"
+ (#match? @constant "^[A-Z][A-Z\\d_0-9]*$")) ; Make uppercase different "type"
 
 ; Highlight functions and builtins
 (function_call function_name: (identifier) @function)
@@ -58,6 +58,15 @@
 (number) @number
 (string) @string
 (boolean) @boolean
+
+[
+  ("(")
+  (")")
+  ("{")
+  ("}")
+  ("[")
+  ("]")
+] @punctuation.bracket
 
 ; String related stuff
 (interpolation
