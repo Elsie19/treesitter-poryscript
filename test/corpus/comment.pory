@@ -7,8 +7,25 @@ script(local) MyScript {
     lock
     if (flag(FLAG_TEMP) == TRUE && var(BANG) == FALSE) {
         foo("foo {COLOR BLUE}\n")
+    } elif (foo) {
+        bar
+    } else {
+        return
+        call
     }
+    do {
+        msgbox("Can you help me solve the puzzle?", MSGBOX_YESNO)
+    } while (var(VAR_RESULT) == 0)
     goto
+    switch (var(BANG)) {
+        case 0:
+            foo()
+        default:
+            bla
+    }
+
+    Myscript(local):
+        foo
 }
 
 mart foo {

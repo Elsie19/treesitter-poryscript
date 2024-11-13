@@ -66,10 +66,12 @@ module.exports = grammar({
       $._expression
     )),
 
-    builtin_func: $ => choice('end', 'return', 'call', 'goto'),
+    builtin_func: $ => choice('call', 'goto', 'flag', 'var', 'defeated', 'value', 'format'),
+
+    builtin_control_flow: $ => choice('end', 'return', 'break', 'continue'),
 
     function_call: $ => prec(2, seq(
-      choice(field('builtin_func', $.builtin_func), field('function_name', $.identifier)),
+      choice($.builtin_func, $.builtin_control_flow, field('function_name', $.identifier)),
       optional(seq(
         '(',
         field('function_params', optional(
@@ -85,7 +87,9 @@ module.exports = grammar({
 
     additives: $ => choice('=', '-', '+', '/', '*'),
 
-    boolean : $ => choice('TRUE', 'true', 'FALSE', 'false'),
+    boolean: $ => choice('TRUE', 'true', 'FALSE', 'false'),
+
+    text_directive: $ => choice('ascii', 'custom'),
 
     logical_operator : $ => choice('||', '&&'),
 
@@ -109,6 +113,49 @@ module.exports = grammar({
       )),
     ),
 
+    while_statement: $ => seq(
+      'while',
+      optional(seq(
+        '(',
+        $._boolean_expression,
+        ')'
+      )),
+      '{',
+      $.scripting,
+      '}',
+    ),
+
+    do_while_statement: $ => seq(
+      'do',
+      '{',
+      $.scripting,
+      '}',
+      'while',
+      seq(
+        '(',
+        $._boolean_expression,
+        ')'
+      ),
+    ),
+
+    switch_statement: $ => seq(
+      'switch',
+      '(',
+      $._boolean_expression,
+      ')',
+      '{',
+      // We can have stuff like `case 0` or just `default`.
+      repeat1(seq(
+        choice(
+          (seq("case", $.number)),
+          "default",
+        ),
+        ":",
+        $.scripting,
+      )),
+      '}',
+    ),
+
     if_statement: $ => seq(
       'if',
       '(',
@@ -117,6 +164,24 @@ module.exports = grammar({
       '{',
       $.scripting,
       '}',
+      // Elif chains
+      repeat(seq(
+        'elif',
+        '(',
+        $._boolean_expression,
+        ')',
+        '{',
+        $.scripting,
+        '}',
+      )),
+      // Final else
+      optional(seq(
+        'else',
+        '{',
+        $.scripting,
+        '}',
+
+      ))
     ),
 
     scope: $ => choice('local', 'global'),
@@ -130,12 +195,23 @@ module.exports = grammar({
       '}',
     ),
 
-    scripting: $ => repeat1(choice(
+    label: $ => seq(
+      field('label_name', $.identifier),
+      optional(seq('(', $.scope, ')')),
+      ':',
+      $.scripting,
+    ),
+
+    scripting: $ => prec.left(repeat1(choice(
       $.comment,
       $.identifier,
       $.function_call,
       $.if_statement,
-    )),
+      $.while_statement,
+      $.do_while_statement,
+      $.switch_statement,
+      $.label,
+    ))),
 
     mart: $ => seq(
       'mart',
@@ -151,7 +227,11 @@ module.exports = grammar({
       optional(seq('(', $.scope, ')')),
       field('text_name', $.identifier),
       '{',
-      repeat($.string),
+      repeat(seq(
+        // We can have `ascii` or `custom` prefixes
+        optional(seq($.text_directive)),
+        $.string,
+      )),
       '}',
     ),
   }

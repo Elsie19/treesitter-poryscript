@@ -37,6 +37,11 @@
     "fields": {}
   },
   {
+    "type": "builtin_control_flow",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "builtin_func",
     "named": true,
     "fields": {}
@@ -80,19 +85,60 @@
     }
   },
   {
+    "type": "do_while_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arithmetic_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "logical_operator",
+          "named": true
+        },
+        {
+          "type": "negate",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "operator",
+          "named": true
+        },
+        {
+          "type": "scripting",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "function_call",
     "named": true,
     "fields": {
-      "builtin_func": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "builtin_func",
-            "named": true
-          }
-        ]
-      },
       "function_name": {
         "multiple": false,
         "required": false,
@@ -121,6 +167,20 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "builtin_control_flow",
+          "named": true
+        },
+        {
+          "type": "builtin_func",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -184,6 +244,36 @@
       "types": [
         {
           "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "label",
+    "named": true,
+    "fields": {
+      "label_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "scope",
+          "named": true
+        },
+        {
+          "type": "scripting",
           "named": true
         }
       ]
@@ -277,6 +367,10 @@
           "named": true
         },
         {
+          "type": "do_while_statement",
+          "named": true
+        },
+        {
           "type": "function_call",
           "named": true
         },
@@ -286,6 +380,18 @@
         },
         {
           "type": "if_statement",
+          "named": true
+        },
+        {
+          "type": "label",
+          "named": true
+        },
+        {
+          "type": "switch_statement",
+          "named": true
+        },
+        {
+          "type": "while_statement",
           "named": true
         }
       ]
@@ -343,6 +449,57 @@
     }
   },
   {
+    "type": "switch_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arithmetic_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "logical_operator",
+          "named": true
+        },
+        {
+          "type": "negate",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "operator",
+          "named": true
+        },
+        {
+          "type": "scripting",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "text",
     "named": true,
     "fields": {
@@ -363,6 +520,66 @@
       "types": [
         {
           "type": "scope",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "text_directive",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "text_directive",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "while_statement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "arithmetic_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "logical_operator",
+          "named": true
+        },
+        {
+          "type": "negate",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "operator",
+          "named": true
+        },
+        {
+          "type": "scripting",
           "named": true
         },
         {
@@ -413,6 +630,10 @@
     "named": false
   },
   {
+    "type": ":",
+    "named": false
+  },
+  {
     "type": "<",
     "named": false
   },
@@ -445,7 +666,19 @@
     "named": false
   },
   {
+    "type": "ascii",
+    "named": false
+  },
+  {
+    "type": "break",
+    "named": false
+  },
+  {
     "type": "call",
+    "named": false
+  },
+  {
+    "type": "case",
     "named": false
   },
   {
@@ -454,6 +687,34 @@
   },
   {
     "type": "const",
+    "named": false
+  },
+  {
+    "type": "continue",
+    "named": false
+  },
+  {
+    "type": "custom",
+    "named": false
+  },
+  {
+    "type": "default",
+    "named": false
+  },
+  {
+    "type": "defeated",
+    "named": false
+  },
+  {
+    "type": "do",
+    "named": false
+  },
+  {
+    "type": "elif",
+    "named": false
+  },
+  {
+    "type": "else",
     "named": false
   },
   {
@@ -466,6 +727,14 @@
   },
   {
     "type": "false",
+    "named": false
+  },
+  {
+    "type": "flag",
+    "named": false
+  },
+  {
+    "type": "format",
     "named": false
   },
   {
@@ -509,11 +778,27 @@
     "named": false
   },
   {
+    "type": "switch",
+    "named": false
+  },
+  {
     "type": "text",
     "named": false
   },
   {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "value",
+    "named": false
+  },
+  {
+    "type": "var",
+    "named": false
+  },
+  {
+    "type": "while",
     "named": false
   },
   {

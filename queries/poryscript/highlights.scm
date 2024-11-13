@@ -3,7 +3,18 @@
 ; Basic highlight groups
 (comment) @comment
 ("const") @modifier
-("if") @keyword.conditional
+[
+ ("if") 
+ ("elif")
+ ("else")
+ ("switch")
+ ("case")
+ ("default")
+] @keyword.conditional
+
+(text_directive) @keyword.directive
+
+[("while") ("do")] @keyword.repeat
 
 ; Structure names
 [
@@ -14,6 +25,7 @@
 
 ; Match the names
 (script script_name: (identifier) @function)
+(label label_name: (identifier) @function)
 (mart mart_name: (identifier) @function)
 (text text_name: (identifier) @function)
 
@@ -31,7 +43,8 @@
 
 ; Highlight functions and builtins
 (function_call function_name: (identifier) @function)
-(function_call builtin_func: (builtin_func) @function.builtin)
+(builtin_func) @function.builtin
+(builtin_control_flow) @keyword.return
 
 ; Basic types
 (number) @number
