@@ -1,14 +1,14 @@
 {
   "grammars": [
     {
-      "name": "poryscript",
+      "name": "pory",
       "camelcase": "Poryscript",
       "scope": "source.pory",
       "path": ".",
       "file-types": [
         "pory"
       ],
-      "injection-regex": "^poryscript$",
+      "injection-regex": "^pory$",
       "highlights": "queries/pory/highlights.scm",
       "locals": "queries/pory/locals.scm"
     }
