@@ -25,15 +25,18 @@ module.exports = grammar({
       $.text,
       $.movement,
       $.mapscripts,
+      $.raw,
     ),
 
     comment: _ => token(prec(-10, choice(/#.*/, /\/\/.*/))),
 
-    const: $ => seq('const', field('const_name', $.identifier), $.additives, $._expression),
+    const: $ => seq('const', field('const_name', $.variable_identifier), $.additives, $._expression),
 
     number: $ => /\d+/,
 
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
+
+    variable_identifier: $ => /[A-Z_][A-Z0-9_]*/,
 
     string: $ => seq(
       '"',
@@ -47,7 +50,7 @@ module.exports = grammar({
 
     interpolation: $ => seq(
       '{',
-      repeat1($.identifier),
+      repeat1($.variable_identifier),
       '}',
     ),
 
@@ -58,9 +61,8 @@ module.exports = grammar({
       )
     )),
 
-    _meta_function_pass: $ => $._comparators,
-
     _expression: $ => choice(
+      $.variable_identifier,
       $.identifier,
       $.number,
       $.arithmetic_expression
@@ -77,7 +79,9 @@ module.exports = grammar({
       $._expression
     )),
 
-    _comparators: $ => choice($.number, $.identifier, $.boolean, $.string),
+    _meta_function_call: $ => $._comparators,
+
+    _comparators: $ => choice($.number, $.variable_identifier, $.boolean, $.string, $.function_call),
 
     builtin_func: $ => choice('call', 'goto', 'flag', 'var', 'defeated', 'value', 'format'),
 
@@ -88,7 +92,7 @@ module.exports = grammar({
       optional(seq(
         '(',
         field('function_params', optional(
-          commaSep1($._meta_function_pass)
+          commaSep1($._meta_function_call)
         )),
         ')',
       ))
@@ -169,6 +173,24 @@ module.exports = grammar({
       '}',
     ),
 
+    default: $ => "_",
+
+    poryswitch: $ => seq(
+      'poryswitch',
+      '(',
+      $.identifier,
+      ')',
+      '{',
+      // We can have stuff like `case 0` or just `default`.
+      repeat1(seq(
+        choice(
+          seq($.identifier, "{", $.scripting, "}"),
+          seq($.default, ":", $.scripting),
+        ),
+      )),
+      '}',
+    ),
+
     if_statement: $ => seq(
       'if',
       '(',
@@ -225,6 +247,7 @@ module.exports = grammar({
       $.do_while_statement,
       $.switch_statement,
       $.label,
+      $.poryswitch,
     ))),
 
     mart: $ => seq(
@@ -286,6 +309,10 @@ module.exports = grammar({
       )),
       '}',
     ),
+
+    raw: $ => seq('raw', '`', optional($.raw_inside), '`'),
+
+    raw_inside: $ => /[^`]+/,
   }
 });
 

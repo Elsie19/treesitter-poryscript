@@ -1,3 +1,7 @@
+raw `
+.set LOCALID_RAYQUAZA_SLEEPING, 1
+`
+
 # foo
 const FOO = 5
 const BAR = FOO + 2 - 5
@@ -23,6 +27,18 @@ script(local) MyScript {
         default:
             bla
     }
+
+    poryswitch(GAME_VERSION) {
+            RUBY {
+                msgbox("Here, take this Ruby Orb.")
+                giveitem(ITEM_RUBY_ORB)
+            }
+            SAPPHIRE {
+                msgbox("Here, take this Sapphire Orb.")
+                giveitem(ITEM_SAPPHIRE_ORB)
+            }
+            _: msgbox(format("This case is used when GAME_VERSION doesn't match either of the above."))
+        }
 
     MyScript(local):
         foo

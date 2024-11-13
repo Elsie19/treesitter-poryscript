@@ -2,7 +2,7 @@
 
 ; Basic highlight groups
 (comment) @comment
-("const") @modifier
+[("const") ("raw")] @modifier
 [
  ("if") 
  ("elif")
@@ -40,12 +40,13 @@
 ; Highlight constants
 (const) @constant
 (const
-  const_name: (identifier) @constant)
+  const_name: (variable_identifier) @constant)
 
 ; Scope as well
 (scope_marker) @label
 
 (identifier) @variable
+(variable_identifier) @constant
 ((identifier) @constant
  (#match? @constant "^[A-Z][A-Z\\d_0-9]*$")) ; Make uppercase different "type"
 
@@ -78,3 +79,10 @@
 ; Operators and keywords
 [(operator) (additives) (logical_operator)] @operator
 (negate) @operator
+
+; Assembly 68k stuff
+((raw_inside) @injection.content
+  (#set! injection.language "asm"))
+
+; Set poryswitch underscore
+(default) @variable.parameter.builtin
