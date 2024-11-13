@@ -315,6 +315,44 @@
     }
   },
   {
+    "type": "movement",
+    "named": true,
+    "fields": {
+      "movement_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "additives",
+          "named": true
+        },
+        {
+          "type": "function_call",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "scope",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "operator",
     "named": true,
     "fields": {}
@@ -416,6 +454,10 @@
         },
         {
           "type": "mart",
+          "named": true
+        },
+        {
+          "type": "movement",
           "named": true
         },
         {
@@ -759,6 +801,10 @@
   },
   {
     "type": "mart",
+    "named": false
+  },
+  {
+    "type": "movement",
     "named": false
   },
   {

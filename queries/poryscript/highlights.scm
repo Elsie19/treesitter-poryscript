@@ -21,6 +21,7 @@
  ("script")
  ("mart")
  ("text")
+ ("movement")
 ] @keyword.function
 
 ; Match the names
@@ -28,6 +29,7 @@
 (label label_name: (identifier) @function)
 (mart mart_name: (identifier) @function)
 (text text_name: (identifier) @function)
+(movement movement_name: (identifier) @function)
 
 ; Highlight constants
 (const) @constant

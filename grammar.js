@@ -18,7 +18,8 @@ module.exports = grammar({
       $.const,
       $.script,
       $.mart,
-      $.text
+      $.text,
+      $.movement,
     ),
 
     comment: _ => token(prec(-10, choice(/#.*/, /\/\/.*/))),
@@ -59,6 +60,11 @@ module.exports = grammar({
       $.number,
       $.arithmetic_expression
     ),
+
+    _movement_expression: $ => prec.left(choice(
+      seq($.function_call, $.additives, $.number, optional(seq($.additives, $._movement_expression))),
+      $.function_call,
+    )),
 
     arithmetic_expression: $ => prec.left(1, seq(
       $._expression,
@@ -232,6 +238,15 @@ module.exports = grammar({
         optional(seq($.text_directive)),
         $.string,
       )),
+      '}',
+    ),
+
+    movement: $ => seq(
+      'movement',
+      optional(seq('(', $.scope, ')')),
+      field('movement_name', $.identifier),
+      '{',
+      repeat($._movement_expression),
       '}',
     ),
   }

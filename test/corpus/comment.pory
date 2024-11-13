@@ -36,3 +36,8 @@ mart foo {
 text foo {
     "bar\n"
 }
+
+movement MyMovement {
+    walk_left * 5
+    face_down * 5 * face * 3
+}
