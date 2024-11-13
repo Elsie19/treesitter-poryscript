@@ -41,7 +41,7 @@ module.exports = grammar({
 
     interpolation: $ => seq(
       '{',
-      $.identifier,
+      repeat1($.identifier),
       '}',
     ),
 
@@ -87,6 +87,8 @@ module.exports = grammar({
 
     boolean : $ => choice('TRUE', 'true', 'FALSE', 'false'),
 
+    logical_operator : $ => choice('||', '&&'),
+
     _boolean_expression: $ => seq(
       optional($.negate),
       choice($.identifier, $.function_call),
@@ -99,6 +101,11 @@ module.exports = grammar({
           $.boolean,
           $.string,
         )
+      )),
+      // We can also repeat with and/or
+      optional(seq(
+        $.logical_operator,
+        $._boolean_expression,
       )),
     ),
 

@@ -1,37 +1,49 @@
 ; highlight.scm for poryscript
 
 ; Basic highlight groups
-(comment) @comment                       ; Highlight comments
+(comment) @comment
+("const") @modifier
+("if") @keyword.conditional
+
+; Structure names
 [
- ("const")
- ("if")
  ("script")
  ("mart")
  ("text")
-] @keyword
+] @keyword.function
+
+; Match the names
 (script script_name: (identifier) @function)
-(const) @constant ; Highlight constants
+(mart mart_name: (identifier) @function)
+(text text_name: (identifier) @function)
+
+; Highlight constants
+(const) @constant
 (const
   const_name: (identifier) @constant)
-(scope) @label ; For things like (local) or (global)
 
-(identifier) @variable ; Variables
+; Scope as well
+(scope) @label
+
+(identifier) @variable
 ((identifier) @constant
  (#match? @constant "^[A-Z][A-Z\\d_]*$")) ; Make uppercase different "type"
 
-(function_call function_name: (identifier) @function) ; Functions
+; Highlight functions and builtins
+(function_call function_name: (identifier) @function)
+(function_call builtin_func: (builtin_func) @function.builtin)
 
-(function_call builtin_func: (builtin_func) @function.builtin) ; Builtin overrides
+; Basic types
+(number) @number
+(string) @string
+(boolean) @boolean
 
-(number) @number                         ; Highlight numbers
-(string) @string                         ; Strings
-
+; String related stuff
 (interpolation
   "{" @punctuation.special
   "}" @punctuation.special) @embedded
-(escape_sequence) @string.escape ; Escape sequences within strings
+(escape_sequence) @string.escape
 
 ; Operators and keywords
-[(operator) (additives)] @operator       ; Comparison operators (e.g., ==, !=)
-(negate) @operator                       ; Negation operator (!)
-(boolean) @boolean                       ; Booleans (TRUE, FALSE, etc.)
+[(operator) (additives) (logical_operator)] @operator
+(negate) @operator

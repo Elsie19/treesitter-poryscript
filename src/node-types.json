@@ -148,6 +148,10 @@
           "named": true
         },
         {
+          "type": "logical_operator",
+          "named": true
+        },
+        {
           "type": "negate",
           "named": true
         },
@@ -175,7 +179,7 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
         {
@@ -184,6 +188,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "logical_operator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "mart",
@@ -372,6 +381,10 @@
     "named": false
   },
   {
+    "type": "&&",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -505,6 +518,10 @@
   },
   {
     "type": "{",
+    "named": false
+  },
+  {
+    "type": "||",
     "named": false
   },
   {

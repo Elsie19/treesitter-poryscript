@@ -128,8 +128,11 @@
           "value": "{"
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
         },
         {
           "type": "STRING",
@@ -417,6 +420,19 @@
         }
       ]
     },
+    "logical_operator": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "||"
+        },
+        {
+          "type": "STRING",
+          "value": "&&"
+        }
+      ]
+    },
     "_boolean_expression": {
       "type": "SEQ",
       "members": [
@@ -471,6 +487,27 @@
                       "name": "string"
                     }
                   ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "logical_operator"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_boolean_expression"
                 }
               ]
             },
