@@ -38,6 +38,5 @@ text foo {
 }
 
 movement MyMovement {
-    walk_left * 5
-    face_down * 5 * face * 3
+    walk_left * 5, face_down * 5 * face * 3
 }

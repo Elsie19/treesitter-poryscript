@@ -58,6 +58,7 @@
   "{" @punctuation.special
   "}" @punctuation.special) @embedded
 (escape_sequence) @string.escape
+(",") @punctuation.delimiter
 
 ; Operators and keywords
 [(operator) (additives) (logical_operator)] @operator

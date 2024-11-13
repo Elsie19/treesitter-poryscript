@@ -10,11 +10,15 @@
 module.exports = grammar({
   name: 'poryscript',
 
+  extras: $ => [
+    /\s/,
+    $.comment,
+  ],
+
   rules: {
     source_file: $ => repeat($._definition),
 
     _definition: $ => choice(
-      $.comment,
       $.const,
       $.script,
       $.mart,
@@ -209,7 +213,6 @@ module.exports = grammar({
     ),
 
     scripting: $ => prec.left(repeat1(choice(
-      $.comment,
       $.identifier,
       $.function_call,
       $.if_statement,
@@ -246,7 +249,7 @@ module.exports = grammar({
       optional(seq('(', $.scope, ')')),
       field('movement_name', $.identifier),
       '{',
-      repeat($._movement_expression),
+      repeat(seq($._movement_expression, optional(','))),
       '}',
     ),
   }
