@@ -12,6 +12,7 @@
  ("default")
 ] @keyword.conditional
 
+; This is for stuff in text like `ascii"hello"`
 (text_directive) @keyword.directive
 
 [("while") ("do")] @keyword.repeat
@@ -22,14 +23,19 @@
  ("mart")
  ("text")
  ("movement")
+ ("mapscripts")
 ] @keyword.function
 
 ; Match the names
-(script script_name: (identifier) @function)
-(label label_name: (identifier) @function)
-(mart mart_name: (identifier) @function)
-(text text_name: (identifier) @function)
-(movement movement_name: (identifier) @function)
+(
+ [
+  (script)
+  (mart)
+  (text)
+  (movement)
+  (mapscripts)
+ ] name: (identifier) @function
+)
 
 ; Highlight constants
 (const) @constant
@@ -37,7 +43,7 @@
   const_name: (identifier) @constant)
 
 ; Scope as well
-(scope) @label
+(scope_marker) @label
 
 (identifier) @variable
 ((identifier) @constant

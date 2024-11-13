@@ -24,7 +24,7 @@ script(local) MyScript {
             bla
     }
 
-    Myscript(local):
+    MyScript(local):
         foo
 }
 
@@ -40,3 +40,25 @@ text foo {
 movement MyMovement {
     walk_left * 5, face_down * 5 * face * 3
 }
+
+mapscripts MyNewCity_MapScripts {
+    MAP_SCRIPT_ON_RESUME: MyNewCity_OnResume
+    MAP_SCRIPT_ON_TRANSITION {
+        random(2)
+        switch (var(VAR_RESULT)) {
+            case 0: setweather(WEATHER_ASH)
+            case 1: setweather(WEATHER_RAIN_HEAVY)
+        }
+    }
+    MAP_SCRIPT_ON_FRAME_TABLE [
+        VAR_TEMP_0, 0: MyNewCity_OnFrame_0
+        VAR_TEMP_0, 1 {
+            lock
+            msgbox("This script is inlined.")
+            setvar(VAR_TEMP_0, 2)
+            release
+        }
+    ]
+}
+
+mapscripts Foo {}

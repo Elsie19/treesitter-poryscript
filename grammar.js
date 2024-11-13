@@ -24,6 +24,7 @@ module.exports = grammar({
       $.mart,
       $.text,
       $.movement,
+      $.mapscripts,
     ),
 
     comment: _ => token(prec(-10, choice(/#.*/, /\/\/.*/))),
@@ -32,7 +33,7 @@ module.exports = grammar({
 
     number: $ => /\d+/,
 
-    identifier: $ => /[a-zA-Z0-9_]+/,
+    identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
     string: $ => seq(
       '"',
@@ -57,7 +58,7 @@ module.exports = grammar({
       )
     )),
 
-    _meta_function_pass: $ => choice($.identifier, $.string),
+    _meta_function_pass: $ => $._comparators,
 
     _expression: $ => choice(
       $.identifier,
@@ -75,6 +76,8 @@ module.exports = grammar({
       $.additives,
       $._expression
     )),
+
+    _comparators: $ => choice($.number, $.identifier, $.boolean, $.string),
 
     builtin_func: $ => choice('call', 'goto', 'flag', 'var', 'defeated', 'value', 'format'),
 
@@ -194,20 +197,22 @@ module.exports = grammar({
       ))
     ),
 
-    scope: $ => choice('local', 'global'),
+    scope_marker: $ => choice('local', 'global'),
+
+    scope: $ => seq('(', $.scope_marker, ')'),
 
     script: $ => seq(
       'script',
-      optional(seq('(', $.scope, ')')),
-      field('script_name', $.identifier),
+      optional($.scope),
+      field('name', $.identifier),
       '{',
       $.scripting,
       '}',
     ),
 
     label: $ => seq(
-      field('label_name', $.identifier),
-      optional(seq('(', $.scope, ')')),
+      field('name', $.identifier),
+      optional($.scope),
       ':',
       $.scripting,
     ),
@@ -224,8 +229,8 @@ module.exports = grammar({
 
     mart: $ => seq(
       'mart',
-      optional(seq('(', $.scope, ')')),
-      field('mart_name', $.identifier),
+      optional($.scope),
+      field('name', $.identifier),
       '{',
       repeat($.identifier),
       '}',
@@ -233,8 +238,8 @@ module.exports = grammar({
 
     text: $ => seq(
       'text',
-      optional(seq('(', $.scope, ')')),
-      field('text_name', $.identifier),
+      optional($.scope),
+      field('name', $.identifier),
       '{',
       repeat(seq(
         // We can have `ascii` or `custom` prefixes
@@ -246,10 +251,39 @@ module.exports = grammar({
 
     movement: $ => seq(
       'movement',
-      optional(seq('(', $.scope, ')')),
-      field('movement_name', $.identifier),
+      optional($.scope),
+      field('name', $.identifier),
       '{',
       repeat(seq($._movement_expression, optional(','))),
+      '}',
+    ),
+
+    mapscripts: $ => seq(
+      'mapscripts',
+      optional($.scope),
+      field('name', $.identifier),
+      '{',
+      // So for this we have a couple ways this can appear.
+      repeat(choice(
+        // FOO: MyNewCity_OnFoo
+        seq($.identifier, ':', $.identifier),
+        // FOO { random(2) }
+        seq($.identifier, '{', $.scripting, '}'),
+        seq(
+          $.identifier,
+          '[',
+          repeat1(seq(
+            $.identifier,
+            ',',
+            $._comparators,
+            choice(
+              seq(':', $.identifier),
+              seq('{', $.scripting, '}'),
+            ),
+          )),
+          ']'
+        ),
+      )),
       '}',
     ),
   }
