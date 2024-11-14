@@ -201,6 +201,11 @@
     }
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "if_statement",
     "named": true,
     "fields": {},
@@ -888,11 +893,11 @@
   },
   {
     "type": "default",
-    "named": true
+    "named": false
   },
   {
     "type": "default",
-    "named": false
+    "named": true
   },
   {
     "type": "defeated",
@@ -937,10 +942,6 @@
   {
     "type": "goto",
     "named": false
-  },
-  {
-    "type": "identifier",
-    "named": true
   },
   {
     "type": "if",
