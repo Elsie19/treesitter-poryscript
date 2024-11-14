@@ -175,7 +175,7 @@ module.exports = grammar({
       // We can have stuff like `case 0` or just `default`.
       repeat1(seq(
         choice(
-          (seq("case", $.number)),
+          (seq("case", choice($.number, $.identifier))),
           "default",
         ),
         ":",

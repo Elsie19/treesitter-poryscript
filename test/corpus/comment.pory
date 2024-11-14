@@ -73,6 +73,7 @@ mapscripts MyNewCity_MapScripts {
             msgbox("This script is inlined.")
             setvar(VAR_TEMP_0, 2)
             release
+            moves(walk_left * 5, face_down * 5 * face * 3)
         }
     ]
 }
