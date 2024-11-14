@@ -1,11 +1,11 @@
-vim.filetype.add({ extension = { pory = "pory" } })
+vim.filetype.add({ extension = { poryscript = "pory" } })
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "pory",
     callback = function(event) vim.bo[event.buf].commentstring = "# %s" end,
 })
 
-require("nvim-treesitter.parsers").get_parser_configs().pory = {
+require("nvim-treesitter.parsers").get_parser_configs().poryscript = {
     install_info = {
         url = "https://github.com/Elsie19/treesitter-poryscript",
         files = { "src/parser.c" },
@@ -15,4 +15,4 @@ require("nvim-treesitter.parsers").get_parser_configs().pory = {
     filetype = "pory",
 }
 
-vim.treesitter.language.register('pory', 'pory')
+vim.treesitter.language.register('poryscript', 'pory')
