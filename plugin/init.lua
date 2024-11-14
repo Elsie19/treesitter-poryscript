@@ -10,6 +10,9 @@ require("nvim-treesitter.parsers").get_parser_configs().pory = {
         url = "https://github.com/Elsie19/treesitter-poryscript",
         files = { "src/parser.c" },
         branch = "master",
+        requires_generate_from_grammar = false,
     },
     filetype = "pory",
 }
+
+vim.treesitter.language.register('pory', 'pory')
