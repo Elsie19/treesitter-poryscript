@@ -92,17 +92,21 @@
       "value": "\\d+"
     },
     "identifier": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PATTERN",
-          "value": "FLAG_[A-Z0-9_]*"
-        },
-        {
-          "type": "PATTERN",
-          "value": "[a-zA-Z_][a-zA-Z0-9_]*"
-        }
-      ]
+      "type": "PREC",
+      "value": 5,
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "PATTERN",
+            "value": "FLAG_[A-Z0-9_]*"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+          }
+        ]
+      }
     },
     "string": {
       "type": "SEQ",
