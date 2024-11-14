@@ -10,6 +10,7 @@
  ("switch")
  ("case")
  ("default")
+ ("poryswitch")
 ] @keyword.conditional
 
 ; This is for stuff in text like `ascii"hello"`
