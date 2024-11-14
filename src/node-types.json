@@ -309,6 +309,16 @@
     "type": "mapscripts",
     "named": true,
     "fields": {
+      "mapscripts_call": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,

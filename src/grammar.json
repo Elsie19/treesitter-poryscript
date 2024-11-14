@@ -1432,8 +1432,12 @@
                     "value": ":"
                   },
                   {
-                    "type": "SYMBOL",
-                    "name": "identifier"
+                    "type": "FIELD",
+                    "name": "mapscripts_call",
+                    "content": {
+                      "type": "SYMBOL",
+                      "name": "identifier"
+                    }
                   }
                 ]
               },

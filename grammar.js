@@ -301,7 +301,7 @@ module.exports = grammar({
       // So for this we have a couple ways this can appear.
       repeat(choice(
         // FOO: MyNewCity_OnFoo
-        seq($.identifier, ':', $.identifier),
+        seq($.identifier, ':', field('mapscripts_call', $.identifier)),
         // FOO { random(2) }
         seq($.identifier, '{', $.scripting, '}'),
         seq(
