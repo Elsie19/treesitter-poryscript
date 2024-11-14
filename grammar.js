@@ -78,6 +78,9 @@ module.exports = grammar({
 
     _meta_function_call: $ => $._comparators,
 
+    // So in here both identifier and function_call conflict since they can appear the same way.
+    // So my idea is that passing functions inside functions where the inner one `foo(foo)` is kinda
+    // weird looking, so here we say that if `foo` occurs inside without (), it must be an ident.
     _comparators: $ => choice($.number, $.identifier, $.boolean, $.string, alias($.function_call_with_parents, $.function_call)),
 
     builtin_func: $ => choice('call', 'goto', 'flag', 'var', 'defeated', 'value', 'format'),
