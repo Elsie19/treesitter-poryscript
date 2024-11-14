@@ -54,6 +54,7 @@
 (function_call function_name: (identifier) @function)
 (builtin_func) @function.builtin
 (builtin_control_flow) @keyword.return
+(label name: (identifier)) @label
 
 ; Basic types
 (number) @number
