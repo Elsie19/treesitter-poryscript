@@ -1090,10 +1090,6 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "identifier"
-            },
-            {
-              "type": "SYMBOL",
               "name": "function_call"
             },
             {

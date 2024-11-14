@@ -237,7 +237,6 @@ module.exports = grammar({
     ),
 
     scripting: $ => prec.left(repeat1(choice(
-      $.identifier,
       $.function_call,
       $.if_statement,
       $.while_statement,
