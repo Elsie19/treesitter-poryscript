@@ -175,7 +175,7 @@ module.exports = grammar({
     poryswitch: $ => seq(
       'poryswitch',
       '(',
-      $.identifier,
+      field('comptime_var', $.identifier),
       ')',
       '{',
       // We can have stuff like `case 0` or just `default`.

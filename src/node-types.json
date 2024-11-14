@@ -431,7 +431,18 @@
   {
     "type": "poryswitch",
     "named": true,
-    "fields": {},
+    "fields": {
+      "comptime_var": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,

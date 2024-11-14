@@ -19,9 +19,9 @@
 #define ALIAS_COUNT 0
 #define TOKEN_COUNT 67
 #define EXTERNAL_TOKEN_COUNT 0
-#define FIELD_COUNT 4
+#define FIELD_COUNT 5
 #define MAX_ALIAS_SEQUENCE_LENGTH 12
-#define PRODUCTION_ID_COUNT 10
+#define PRODUCTION_ID_COUNT 11
 
 enum ts_symbol_identifiers {
   sym_comment = 1,
@@ -833,14 +833,16 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
 };
 
 enum ts_field_identifiers {
-  field_const_name = 1,
-  field_function_name = 2,
-  field_function_params = 3,
-  field_name = 4,
+  field_comptime_var = 1,
+  field_const_name = 2,
+  field_function_name = 3,
+  field_function_params = 4,
+  field_name = 5,
 };
 
 static const char * const ts_field_names[] = {
   [0] = NULL,
+  [field_comptime_var] = "comptime_var",
   [field_const_name] = "const_name",
   [field_function_name] = "function_name",
   [field_function_params] = "function_params",
@@ -857,6 +859,7 @@ static const TSFieldMapSlice ts_field_map_slices[PRODUCTION_ID_COUNT] = {
   [7] = {.index = 7, .length = 1},
   [8] = {.index = 8, .length = 3},
   [9] = {.index = 11, .length = 2},
+  [10] = {.index = 13, .length = 1},
 };
 
 static const TSFieldMapEntry ts_field_map_entries[] = {
@@ -882,6 +885,8 @@ static const TSFieldMapEntry ts_field_map_entries[] = {
   [11] =
     {field_function_params, 2},
     {field_function_params, 3},
+  [13] =
+    {field_comptime_var, 2},
 };
 
 static const TSSymbol ts_alias_sequences[PRODUCTION_ID_COUNT][MAX_ALIAS_SEQUENCE_LENGTH] = {
@@ -11802,8 +11807,8 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [302] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_while_statement, 7, 0, 0),
   [304] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_switch_statement, 7, 0, 0),
   [306] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_switch_statement, 7, 0, 0),
-  [308] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_poryswitch, 7, 0, 0),
-  [310] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_poryswitch, 7, 0, 0),
+  [308] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_poryswitch, 7, 0, 10),
+  [310] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_poryswitch, 7, 0, 10),
   [312] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_do_while_statement, 8, 0, 0),
   [314] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_do_while_statement, 8, 0, 0),
   [316] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_label, 3, 0, 5),

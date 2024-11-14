@@ -88,3 +88,4 @@
 
 ; Set poryswitch underscore
 (default) @variable.parameter.builtin
+(poryswitch comptime_var: (identifier)) @constant.macro
