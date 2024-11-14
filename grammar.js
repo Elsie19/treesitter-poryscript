@@ -34,7 +34,7 @@ module.exports = grammar({
 
     number: $ => /\d+/,
 
-    identifier: $ => prec(5, choice(/FLAG_[A-Z0-9_]*/, /[a-zA-Z_][a-zA-Z0-9_]*/)),
+    identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
     string: $ => seq(
       '"',
