@@ -40,13 +40,13 @@
 ; Highlight constants
 (const) @constant
 (const
-  const_name: (variable_identifier) @constant)
+  const_name: (identifier) @constant)
 
 ; Scope as well
 (scope_marker) @label
 
 (identifier) @variable
-(variable_identifier) @constant
+(identifier) @constant
 ((identifier) @constant
  (#match? @constant "^[A-Z][A-Z\\d_0-9]*$")) ; Make uppercase different "type"
 
