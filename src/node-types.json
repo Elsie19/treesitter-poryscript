@@ -47,6 +47,11 @@
     "fields": {}
   },
   {
+    "type": "colon",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "const",
     "named": true,
     "fields": {
@@ -280,6 +285,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "colon",
+          "named": true
+        },
         {
           "type": "scope",
           "named": true
@@ -868,11 +877,11 @@
   },
   {
     "type": "default",
-    "named": false
+    "named": true
   },
   {
     "type": "default",
-    "named": true
+    "named": false
   },
   {
     "type": "defeated",

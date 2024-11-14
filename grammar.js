@@ -229,12 +229,12 @@ module.exports = grammar({
       '}',
     ),
 
-    _colon: $ => ":",
+    colon: $ => ":",
 
     label: $ => seq(
       field('name', $.identifier),
       optional($.scope),
-      $._colon,
+      $.colon,
       $.scripting,
     ),
 

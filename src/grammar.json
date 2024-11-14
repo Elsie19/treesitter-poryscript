@@ -1047,7 +1047,7 @@
         }
       ]
     },
-    "_colon": {
+    "colon": {
       "type": "STRING",
       "value": ":"
     },
@@ -1076,7 +1076,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_colon"
+          "name": "colon"
         },
         {
           "type": "SYMBOL",
