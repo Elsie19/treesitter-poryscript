@@ -1145,10 +1145,6 @@
         }
       ]
     },
-    "colon": {
-      "type": "STRING",
-      "value": ":"
-    },
     "label": {
       "type": "SEQ",
       "members": [
@@ -1173,8 +1169,8 @@
           ]
         },
         {
-          "type": "SYMBOL",
-          "name": "colon"
+          "type": "STRING",
+          "value": ":"
         },
         {
           "type": "SYMBOL",
