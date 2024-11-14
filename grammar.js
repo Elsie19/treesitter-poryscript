@@ -78,7 +78,7 @@ module.exports = grammar({
 
     _meta_function_call: $ => $._comparators,
 
-    _comparators: $ => choice($.number, $.identifier, $.boolean, $.string, $.function_call),
+    _comparators: $ => choice($.number, $.identifier, $.boolean, $.string, alias($.function_call_with_parents, $.function_call)),
 
     builtin_func: $ => choice('call', 'goto', 'flag', 'var', 'defeated', 'value', 'format'),
 
@@ -93,6 +93,17 @@ module.exports = grammar({
         )),
         ')',
       ))
+    )),
+
+    function_call_with_parents: $ => prec(2, seq(
+      choice($.builtin_func, $.builtin_control_flow, field('function_name', $.identifier)),
+      seq(
+        '(',
+        field('function_params', optional(
+          commaSep1($._meta_function_call)
+        )),
+        ')',
+      )
     )),
 
     negate: $ => '!',
