@@ -1,7 +1,7 @@
 vim.filetype.add({ extension = { poryscript = "pory" } })
 
 vim.api.nvim_create_autocmd("FileType", {
-    pattern = "pory",
+    pattern = "poryscript",
     callback = function(event) vim.bo[event.buf].commentstring = "# %s" end,
 })
 
