@@ -74,7 +74,7 @@
           "name": "const_name",
           "content": {
             "type": "SYMBOL",
-            "name": "variable_identifier"
+            "name": "identifier"
           }
         },
         {
@@ -94,10 +94,6 @@
     "identifier": {
       "type": "PATTERN",
       "value": "[a-zA-Z_][a-zA-Z0-9_]*"
-    },
-    "variable_identifier": {
-      "type": "PATTERN",
-      "value": "[A-Z_][A-Z0-9_]*"
     },
     "string": {
       "type": "SEQ",
@@ -143,7 +139,7 @@
           "type": "REPEAT1",
           "content": {
             "type": "SYMBOL",
-            "name": "variable_identifier"
+            "name": "identifier"
           }
         },
         {
@@ -196,10 +192,6 @@
     "_expression": {
       "type": "CHOICE",
       "members": [
-        {
-          "type": "SYMBOL",
-          "name": "variable_identifier"
-        },
         {
           "type": "SYMBOL",
           "name": "identifier"
@@ -299,7 +291,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "variable_identifier"
+          "name": "identifier"
         },
         {
           "type": "SYMBOL",

@@ -27,10 +27,6 @@
         {
           "type": "number",
           "named": true
-        },
-        {
-          "type": "variable_identifier",
-          "named": true
         }
       ]
     }
@@ -59,7 +55,7 @@
         "required": true,
         "types": [
           {
-            "type": "variable_identifier",
+            "type": "identifier",
             "named": true
           }
         ]
@@ -83,10 +79,6 @@
         },
         {
           "type": "number",
-          "named": true
-        },
-        {
-          "type": "variable_identifier",
           "named": true
         }
       ]
@@ -139,10 +131,6 @@
         {
           "type": "string",
           "named": true
-        },
-        {
-          "type": "variable_identifier",
-          "named": true
         }
       ]
     }
@@ -178,15 +166,15 @@
             "named": true
           },
           {
+            "type": "identifier",
+            "named": true
+          },
+          {
             "type": "number",
             "named": true
           },
           {
             "type": "string",
-            "named": true
-          },
-          {
-            "type": "variable_identifier",
             "named": true
           }
         ]
@@ -254,10 +242,6 @@
         {
           "type": "string",
           "named": true
-        },
-        {
-          "type": "variable_identifier",
-          "named": true
         }
       ]
     }
@@ -271,7 +255,7 @@
       "required": true,
       "types": [
         {
-          "type": "variable_identifier",
+          "type": "identifier",
           "named": true
         }
       ]
@@ -357,10 +341,6 @@
         },
         {
           "type": "string",
-          "named": true
-        },
-        {
-          "type": "variable_identifier",
           "named": true
         }
       ]
@@ -676,10 +656,6 @@
         {
           "type": "string",
           "named": true
-        },
-        {
-          "type": "variable_identifier",
-          "named": true
         }
       ]
     }
@@ -769,10 +745,6 @@
         },
         {
           "type": "string",
-          "named": true
-        },
-        {
-          "type": "variable_identifier",
           "named": true
         }
       ]
@@ -1021,10 +993,6 @@
   {
     "type": "var",
     "named": false
-  },
-  {
-    "type": "variable_identifier",
-    "named": true
   },
   {
     "type": "while",

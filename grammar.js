@@ -30,13 +30,11 @@ module.exports = grammar({
 
     comment: _ => token(prec(-10, choice(/#.*/, /\/\/.*/))),
 
-    const: $ => seq('const', field('const_name', $.variable_identifier), $.additives, $._expression),
+    const: $ => seq('const', field('const_name', $.identifier), $.additives, $._expression),
 
     number: $ => /\d+/,
 
     identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
-
-    variable_identifier: $ => /[A-Z_][A-Z0-9_]*/,
 
     string: $ => seq(
       '"',
@@ -50,7 +48,7 @@ module.exports = grammar({
 
     interpolation: $ => seq(
       '{',
-      repeat1($.variable_identifier),
+      repeat1($.identifier),
       '}',
     ),
 
@@ -62,7 +60,6 @@ module.exports = grammar({
     )),
 
     _expression: $ => choice(
-      $.variable_identifier,
       $.identifier,
       $.number,
       $.arithmetic_expression
@@ -81,7 +78,7 @@ module.exports = grammar({
 
     _meta_function_call: $ => $._comparators,
 
-    _comparators: $ => choice($.number, $.variable_identifier, $.boolean, $.string, $.function_call),
+    _comparators: $ => choice($.number, $.identifier, $.boolean, $.string, $.function_call),
 
     builtin_func: $ => choice('call', 'goto', 'flag', 'var', 'defeated', 'value', 'format'),
 
