@@ -2,7 +2,7 @@
   "grammars": [
     {
       "name": "pory",
-      "camelcase": "Poryscript",
+      "camelcase": "Pory",
       "scope": "source.pory",
       "path": ".",
       "file-types": [
