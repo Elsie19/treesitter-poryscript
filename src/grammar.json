@@ -876,8 +876,16 @@
                 "value": ":"
               },
               {
-                "type": "SYMBOL",
-                "name": "scripting"
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "scripting"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
               }
             ]
           }

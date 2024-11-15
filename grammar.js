@@ -179,7 +179,8 @@ module.exports = grammar({
           "default",
         ),
         ":",
-        $.scripting,
+        // We can have concatitive case matches
+        optional($.scripting),
       )),
       '}',
     ),
